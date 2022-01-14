@@ -16,8 +16,14 @@ class trip:
         passangers = self.passangers.split(",")
         for elm in passangers:
             r.sadd(f"trip_passanager{trip.id}",elm)
+        trip_details = {
+            "start":self.start,
+            "end":self.end,
+            "price" : self.price,
+            "passnager":f"trip_passanager{trip.id}"
+        }
 
-        r.hset(f"trip_id{trip.id}","start",self.start,"end",self.end,"price",self.price,"passangers",f"trip_passanager{trip.id}")
+        r.hset(f"trip_id{trip.id}",trip_details)
         
 
 class tour :
@@ -35,4 +41,10 @@ class tour :
         passangers = self.passangers.split(",")
         for elm in passangers:
             r.sadd(f"tour_passanager{tour.id}",elm)
-        r.hset(f"tour_id{tour.id}","leader",self.leadr,"durations",self.duration,"about",self.about,"passangers",f"tour_passanager{tour.id}")
+        tour_details = {
+            "leader":self.leadr,
+            "durations":self.durations,
+            "about" : self.about,
+            "passnager":f"tour_passanager{tour.id}"
+        }
+        r.hset(f"tour_id{tour.id}",tour_details)

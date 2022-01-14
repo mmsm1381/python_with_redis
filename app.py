@@ -16,6 +16,10 @@ while status=="register":
         User = user(username,age,phone_number,password)
         User.register()
         status = input("trips/tours?\n")
+        if status=="trips":
+            for i in range(1,(trip.id+1)):
+                r.hgetall()
+
     except:
         status = input("something went wrong!(register/login?\n)")
 
@@ -38,17 +42,32 @@ while status == "add_trip" or "add_tour":
         start = input("start:\n")
         end = input("end:\n")
         price = input("price:\n")
-        passangers = input("passangers(spilt with ,):\n")
+        passangers = input("passangers(phones)(spilt with ,):\n")
+
+        for passanger in passangers :
+            if passanger in user.all_user:
+                pass
+            else:
+                break
+            status = input(f"{passanger} is not available \n register/login/add_trip/add_tour?\n")
+
         Trip = trip(start,end,price,passangers)
         Trip.make_trip()
-        status = input("register/login/add_trip/add_tour?\n")
+        status = input("trip made \n register/login/add_trip/add_tour?\n")
 
 
     if status == "add_tour" :
         leader = input("leader:\n")
         durtions = input("durtions:\n")
         about = input("about:\n")
-        passangers = input("passangers(spilt with ,):\n")
+        passangers = input("passangers(phones)(spilt with ,):\n")
+        for passanger in passangers :
+            if passanger in user.all_user:
+                pass
+            else:
+                break
+            status = input(f"{passanger} is not available \n register/login/add_trip/add_tour?\n")
+
         TOUR = tour(leader,passangers,durtions,about)
         TOUR.make_tour()
-        status = input("register/login/add_trip/add_tour?\n")
+        status = input("tour made \n register/login/add_trip/add_tour?\n")
